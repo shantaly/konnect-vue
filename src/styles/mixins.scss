@@ -1,0 +1,55 @@
+@import './variables';
+
+@mixin breakpoint($point) {
+    @if $point==x-small {
+        @media (min-width: $bp-x-small) {
+            @content ;
+        }
+    }
+
+    @else if $point==small {
+        @media (min-width: $bp-small) {
+            @content ;
+        }
+    }
+
+    @else if $point==medium {
+        @media (min-width: $bp-med) {
+            @content ;
+        }
+    }
+
+    @else if $point==large {
+        @media (min-width: $bp-large) {
+            @content ;
+        }
+    }
+
+    @else if $point==x-large {
+        @media (min-width: $bp-x-large) {
+            @content ;
+        }
+    }
+
+    // This shouldn't be relied on.  Style up, not down.
+    @media (min-width: $point) {
+        @content ;
+    }
+}
+
+@mixin linear-gradient($direction, $color-stops...) {
+    @if is-direction($direction)==false {
+        $color-stops: $direction, $color-stops;
+        $direction: 180deg;
+    }
+
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+}
+
+@mixin box-shadow($params...) {
+    -webkit-box-shadow: $params;
+    -moz-box-shadow: $params;
+    box-shadow: $params;
+}
