@@ -97,9 +97,10 @@ export default defineComponent({
     p {
       border-radius: 4px;
       padding: 1.5px 6px 2.5px;
-    }
-    &:not(:first-child) {
-      margin-left: 4px;
+      background-color: #ededf0;
+      &:not(:first-child) {
+        margin-left: 4px;
+      }
     }
     .highlighted {
       background-color: #bdd3f9;

@@ -84,7 +84,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, onBeforeMount, onUnmounted, ref, watch } from 'vue'
 import useServices from '@/composables/useServices'
 import usePagination from '@/composables/usePagination'
 import ServiceCard from '@/components/ServiceCard.vue'
@@ -102,6 +102,31 @@ export default defineComponent({
     const router = useRouter()
     // Import services from the composable
     const { alphabticallySortedServices, loading, getServices } = useServices()
+
+    const itemsPerPage = ref(9)
+    onBeforeMount(() => {
+      if (window.innerWidth >= 1390) {
+        itemsPerPage.value = 9
+      } else if (window.innerWidth >= 908) {
+        itemsPerPage.value = 8
+      } else {
+        itemsPerPage.value = 5
+      }
+      window.addEventListener('resize', resizeHandler)
+    })
+    const resizeHandler = () => {
+      if (window.innerWidth >= 1390) {
+        itemsPerPage.value = 9
+      } else if (window.innerWidth >= 908) {
+        itemsPerPage.value = 8
+      } else {
+        itemsPerPage.value = 5
+      }
+    }
+    onUnmounted(() => {
+      window.removeEventListener('resize', resizeHandler)
+    })
+
     const {
       currentPageList,
       prevPageAvailable,
@@ -112,7 +137,7 @@ export default defineComponent({
       rangeEnd,
       itemsCount,
       resetCurrentPage,
-    } = usePagination(alphabticallySortedServices)
+    } = usePagination(alphabticallySortedServices, itemsPerPage)
 
     // Search input
     const searchQuery = ref('')
@@ -248,7 +273,7 @@ export default defineComponent({
   @include breakpoint(x-small) {
     grid-template-columns: repeat(auto-fit, minmax(410px, 1fr));
   }
-  .service-card{
+  .service-card {
     cursor: pointer;
   }
 }

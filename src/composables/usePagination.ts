@@ -1,15 +1,15 @@
 import { ref, computed, Ref } from 'vue'
 
-export default function usePagination(list: Ref<Array<any>>, itemsPerPage = 9): any {
+export default function usePagination(list: Ref<Array<any>>, itemsPerPage: Ref<number>): any {
   const currentPage = ref<number>(1)
 
   const itemsCount = computed(() => list.value.length)
   const totalPages = computed(() =>
-    Math.ceil(itemsCount.value / itemsPerPage),
+    Math.ceil(itemsCount.value / itemsPerPage.value),
   )
 
-  const rangeStart = computed(() => ((currentPage.value - 1) * itemsPerPage) + 1)
-  const rangeEnd = computed(() => (currentPage.value - 1) * itemsPerPage + itemsPerPage > itemsCount.value ? itemsCount.value : (currentPage.value - 1) * itemsPerPage + itemsPerPage)
+  const rangeStart = computed(() => ((currentPage.value - 1) * itemsPerPage.value) + 1)
+  const rangeEnd = computed(() => (currentPage.value - 1) * itemsPerPage.value + itemsPerPage.value > itemsCount.value ? itemsCount.value : (currentPage.value - 1) * itemsPerPage.value + itemsPerPage.value)
 
   const currentPageList = computed(() => {
     return list.value.slice(rangeStart.value - 1, rangeEnd.value)
