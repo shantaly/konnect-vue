@@ -79,14 +79,14 @@ export default defineComponent({
     flex: 1 1 10%;
   }
   &__description {
-    flex: 0 1 40%;
+    flex: 0 1 50%;
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
     color: #8a8a8a;
   }
   &__tags {
-    flex: 0 1 30%;
+    flex: 0 1 20%;
     display: flex;
     align-items: flex-start;
     padding: 0 6px;
