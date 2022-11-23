@@ -159,3 +159,11 @@ yarn commit
 ```
 
 This will trigger the Commitizen interactive prompt for building your commit message.
+
+### Submission notes
+
+- I found the design not easy to work with due to the lack of any design system being used. Due to that, there are a lot of hard-coded styling values which I dislike.
+- Usually, I like to set up a styling system initially before building any application. I found it tough to find any pattern in the typography, spacing, and colors used across all the designs. I also like to use variables of base 8px, so I tried to be close to multiples of 8 while implementing this design.
+- SVG imports: was unsure about the best way to manage the imports. i.e. store in `assets/` folder as `.svg` or create `.vue` files to import them inline for better control over fill. I ended up using both depending on the use case.
+- I decided to implement the full solution using only composables since I have little experience in them and wanted to explore them more.
+- I also do not think this can be built properly in a few hours. I would say a minimum of 6 hours.
